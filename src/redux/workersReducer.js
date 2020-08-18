@@ -1,5 +1,5 @@
 const DELETE_SELECTED_WORKER = 'DELETE_SELECTED_WORKER';
-const ADD_WORKER = 'ADD_WORKER';
+const ADD_NEW_WORKER = 'ADD_NEW_WORKER';
 const SELECT_WORKER = 'SELECT_WORKER';
 const ON_FULL_NAME_CHANGED = 'ON_FULL_NAME_CHANGED';
 const ON_POSITION_CHANGED = 'ON_POSITION_CHANGED';
@@ -53,23 +53,25 @@ const workersReducer = (state = initialState, action) => {
                 selectedWorker: null               
             }
         }
-        case ADD_WORKER: {
+        case ADD_NEW_WORKER: {
             let identify = () => {
                 return state.workers[state.workers.length - 1].id + 1;
             }
 
-            state.dataWorker = {
+            let newWorker = {
                 id: identify(), 
                 fullName: '', 
-                position: 'Стажёр', 
-                birthDay: '1970-01-01', 
+                position: '', 
+                birthDay: '',
                 gender: 'male', 
                 dismissed: false
             }
-
+            debugger
             return{
                 ...state,
-                workers: [...state.workers, state.dataWorker],
+                workers: [...state.workers, newWorker],
+                dataWorker: newWorker,
+                selectedWorker: newWorker.id
             }
         }
         case SELECT_WORKER: {
@@ -143,7 +145,7 @@ const workersReducer = (state = initialState, action) => {
 }
 
 export const deleteSelectedWorkedAC = () => ({type: DELETE_SELECTED_WORKER});
-export const addWorkerAC = () => ({type: ADD_WORKER});
+export const addNewWorkerAC = () => ({type: ADD_NEW_WORKER});
 export const selectWorkerAC = (idWorker) => ({type: SELECT_WORKER, idWorker});
 export const onFullNameChangedAC = (newFullName) => ({type: ON_FULL_NAME_CHANGED, newFullName});
 export const onPositionChangedAC = (newPosition) => ({type: ON_POSITION_CHANGED, newPosition});

@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteSelectedWorkedAC } from '../redux/workersReducer';
+import { deleteSelectedWorkedAC, addNewWorkerAC } from '../redux/workersReducer';
 import Instruments from './Instruments';
 
 class InstrumentsContainer extends React.Component{
-    debugger;
     render(){
-        return <Instruments deleteSelectedWorker={this.props.deleteSelectedWorker}/>        
+        return <Instruments deleteSelectedWorker={this.props.deleteSelectedWorker}
+                            addNewWorker={this.props.addNewWorker}/>        
     }
 }
 
@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    deleteSelectedWorker: deleteSelectedWorkedAC
+    deleteSelectedWorker: deleteSelectedWorkedAC,
+    addNewWorker: addNewWorkerAC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstrumentsContainer);

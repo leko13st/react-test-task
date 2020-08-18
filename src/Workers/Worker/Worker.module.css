@@ -1,6 +1,7 @@
 .worker{
     margin: 10px;
     border: 2px solid blue;
+    height: 110px;
 }
 
 .selectedWorker{

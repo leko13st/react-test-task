@@ -12,7 +12,7 @@ const Worker = (props) => {
             <div>{props.data.fullName}</div>
             <div>{props.data.position}</div>           
             <div>{props.data.birthDay}</div>           
-            <div>{props.data.gender}</div>           
+            <div>{props.data.gender === 'male' ? 'Мужчина' : 'Женщина'}</div>           
             <div>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</div>           
         </div>
     )
