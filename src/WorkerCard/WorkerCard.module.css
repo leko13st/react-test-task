@@ -1,0 +1,4 @@
+.workerCard{
+    grid-area: workerCard;
+    border: 3px solid black;
+}

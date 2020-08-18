@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  background: url('D:\\MyDocs\\ReactProjects\\react-test-task\\src\\common\\images\\bg.jpg');
 }
 
 code {

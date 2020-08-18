@@ -1,0 +1,5 @@
+.instruments{
+    grid-area: instruments;
+    border: 3px solid black;
+    height: 200px;
+}
