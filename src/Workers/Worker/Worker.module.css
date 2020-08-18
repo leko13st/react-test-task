@@ -1,0 +1,13 @@
+.worker{
+    margin: 10px;
+    border: 2px solid blue;
+}
+
+.selectedWorker{
+    background: yellowgreen;
+}
+
+.worker:hover{
+    background: yellowgreen;
+    cursor: pointer;
+}

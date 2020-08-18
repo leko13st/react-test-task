@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
 import Header from './Header/Header';
-import Instruments from './Instruments/Instruments';
-import Workers from './Workers/Workers';
-import WorkerCard from './WorkerCard/WorkerCard';
+import WorkersContainer from './Workers/WorkersContainer';
+import InstrumentsContainer from './Instruments/InstrumentsContainer';
+import WorkerCardContainer from './WorkerCard/WorkerCardContainer';
 
 function App() {
   return (
     <div className="app-wrapper">
       <Header />
-      <Instruments />
-      <Workers />
-      <WorkerCard />
+      <InstrumentsContainer />
+      <WorkersContainer />
+      <WorkerCardContainer />
     </div>
   );
 }
