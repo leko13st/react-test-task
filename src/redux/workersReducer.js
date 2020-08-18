@@ -1,13 +1,14 @@
 const DELETE_SELECTED_WORKER = 'DELETE_SELECTED_WORKER';
 const SELECT_WORKER = 'SELECT_WORKER';
+const ON_FULL_NAME_CHANGED = 'ON_FULL_NAME_CHANGED';
 
 let initialState = {
     workers: [
-        {id: 1, fullName: 'Иванов Иван Иванович', position: 'Директор', birthDate: '12.01.1980', gender: 'м', dismissed: false, colleagues: [4]},
-        {id: 2, fullName: 'Цаль Виталий Олегович', position: 'Программист', birthDate: '03.04.1990', gender: 'м', dismissed: false, colleagues: [3]},
-        {id: 3, fullName: 'Иванова Анна Алексеевна', position: 'Аналитик', birthDate: '06.08.1995', gender: 'ж', dismissed: false, colleagues: [2]},
-        {id: 4, fullName: 'Козлов Александр Вадимович', position: 'HR', birthDate: '23.07.1987', gender: 'м', dismissed: true, colleagues: [1, 5]},
-        {id: 5, fullName: 'Бодров Данила Сергеевич', position: 'Тестер', birthDate: '01.09.1998', gender: 'м', dismissed: false, colleagues: [4]}
+        {id: 1, fullName: 'Иванов Иван Иванович', position: 'Директор', birthDay: '1976-08-15', gender: 'male', dismissed: false, colleagues: [4]},
+        {id: 2, fullName: 'Цаль Виталий Олегович', position: 'Программист', birthDay: '1991-01-19', gender: 'male', dismissed: false, colleagues: [3]},
+        {id: 3, fullName: 'Иванова Анна Алексеевна', position: 'Аналитик', birthDay: '1998-07-21', gender: 'female', dismissed: false, colleagues: [2]},
+        {id: 4, fullName: 'Козлов Александр Вадимович', position: 'HR', birthDay: '1990-04-08', gender: 'male', dismissed: true, colleagues: [1, 5]},
+        {id: 5, fullName: 'Бодров Данила Сергеевич', position: 'Тестер', birthDay: '1985-03-16', gender: 'male', dismissed: false, colleagues: [4]}
     ],
     positions: [
         'Директор',
@@ -18,18 +19,25 @@ let initialState = {
         'Инженер',
         'Бухгалтер'
     ],
-    selectedWorker: null
+    selectedWorker: null,
+    dataWorker: null
 }
 
 const workersReducer = (state = initialState, action) => {
+    let index = -1;
+
+    let findIndex = (idWorker) => { 
+        for (let i = 0; i < state.workers.length; i++){
+            if (state.workers[i].id === idWorker){
+                index = i;
+                break
+            }
+        }
+    }
+    
     switch (action.type){
         case DELETE_SELECTED_WORKER: {
-            let index = -1;
-            for (let i = 0; i < state.workers.length; i++)
-                if (state.workers[i].id === state.selectedWorker){
-                    index = i;
-                    break
-                }
+            findIndex(state.selectedWorker);           
             let array = state.workers.slice(0);
             array.splice(index, 1)
 
@@ -40,17 +48,30 @@ const workersReducer = (state = initialState, action) => {
             }
         }
         case SELECT_WORKER: {
+            findIndex(action.idWorker);     
+            let worker = state.workers.slice(0).splice(index, 1)[0]
+
             return{
                 ...state,
-                selectedWorker: action.idWorker
+                selectedWorker: action.idWorker,
+                dataWorker: worker
             }
+        }
+        case ON_FULL_NAME_CHANGED: {
+            return{
+                ...state,
+                workers: [...state.workers],
+                dataWorker: {...state.dataWorker, fullName: action.newFullName}
+            }
+
         }
         default:
             return state;
     }
 }
 
-export const deleteSelectedWorkedAC = () => ({type: DELETE_SELECTED_WORKER})
-export const selectWorkerAC = (idWorker) => ({type: SELECT_WORKER, idWorker})
+export const deleteSelectedWorkedAC = () => ({type: DELETE_SELECTED_WORKER});
+export const selectWorkerAC = (idWorker) => ({type: SELECT_WORKER, idWorker});
+export const onFullNameChangedAC = (newFullName) => ({type: ON_FULL_NAME_CHANGED, newFullName});
 
 export default workersReducer;
