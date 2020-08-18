@@ -20,7 +20,7 @@ const WorkerCard = (props) => {
                 </>
             )
         }
-        else {
+        else if (props.dataWorker.gender === 'female') {
             return (
                 <> 
                     <input name="gender" type="radio" value="male"/>Муж.
@@ -37,38 +37,31 @@ const WorkerCard = (props) => {
             return <input type="checkbox"/>
     }
 
-    let fullNameText = React.createRef();
-
-    const onFullNameChanged = () => {
-        let fullName = fullNameText.current.value;
-        props.onFullNameChanged(fullName);
+    const onFullNameChanged = (event) => {
+        props.onFullNameChanged(event.target.value);
     }
 
-    const onPositionChanged = () => {
-        let fullName = fullNameText.current.value;
-        props.onPositionChanged(fullName);
+    const onPositionChanged = (event) => {        
+        props.onPositionChanged(event.target.value);
     }
 
-    const onBirthDayChanged = () => {
-        let fullName = fullNameText.current.value;
-        props.onBirthDayChanged(fullName);
+    const onBirthDayChanged = (event) => {
+        props.onBirthDayChanged(event.target.value);
     }
 
-    const onGenderGhanged = () => {
-        let fullName = fullNameText.current.value;
-        props.onGenderGhanged(fullName);
+    const onGenderChanged = (event) => {
+        props.onGenderChanged(event.target.value);
     }
 
-    const onDismissedChanged = () => {
-        let fullName = fullNameText.current.value;
-        props.onDismissedChanged(fullName);
+    const onDismissedChanged = (event) => {
+        props.onDismissedChanged(event.target.checked);
     }
 
     return(
         <div className={styles.workerCard} dataWorker={props.dataWorker}>
             <form>
                 <div onChange={onFullNameChanged}>
-                    ФИО: <input type="text" placeholder="Заполните поле" ref={fullNameText} value={props.dataWorker.fullName}/>
+                    ФИО: <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/>
                 </div>
                 <div onChange={onPositionChanged}>
                     Должность: 
@@ -79,7 +72,7 @@ const WorkerCard = (props) => {
                 <div onChange={onBirthDayChanged}>
                     Дата рождения: <input type="date" value={props.dataWorker.birthDay}/>
                 </div>
-                <div onChange={onGenderGhanged}>
+                <div onChange={onGenderChanged}>
                     Пол: {gender()}
                 </div>
                 <div onChange={onDismissedChanged}>

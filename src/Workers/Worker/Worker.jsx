@@ -11,7 +11,7 @@ const Worker = (props) => {
         <div className={styleWorkerList} onClick={() => props.selectWorker(props.data.id)}>
             <div>{props.data.fullName}</div>
             <div>{props.data.position}</div>           
-            <div>{props.data.birthDate}</div>           
+            <div>{props.data.birthDay}</div>           
             <div>{props.data.gender}</div>           
             <div>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</div>           
         </div>
