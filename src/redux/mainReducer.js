@@ -6,7 +6,6 @@ const ON_POSITION_CHANGED = 'ON_POSITION_CHANGED';
 const ON_BIRTH_DAY_CHANGED = 'ON_BIRTH_DATE_CHANGED';
 const ON_GENDER_CHANGED = 'ON_GENDER_CHANGED';
 const ON_DISMISSED_CHANGED = 'ON_DISMISSED_CHANGED';
-const IS_INVALID_WORKER = 'IS_INVALID_WORKER';
 
 let initialState = {
     //список сотрудников
@@ -35,6 +34,7 @@ let initialState = {
 
 const workersReducer = (state = initialState, action) => {
     let index = -1;
+    //поиска свободного индекса для назначения его работнику
     let findIndex = (idWorker) => { 
         for (let i = 0; i < state.workers.length; i++){
             if (state.workers[i].id === idWorker){
@@ -44,6 +44,7 @@ const workersReducer = (state = initialState, action) => {
         }
     }
 
+    //Получить обновлённого данные работника
     let getUpdatedWorker = (property) => {
         let worker = null;
         state.workers.map(person => {
@@ -65,6 +66,7 @@ const workersReducer = (state = initialState, action) => {
         return worker;
     }
 
+    //Получить обновлённый список данных работников
     let getUpdatedWorkers = (worker) => {
             return state.workers.map(workerItem => {
                 if (workerItem.id === state.selectedWorker)
@@ -187,6 +189,5 @@ export const onPositionChangedAC = (newPosition) => ({type: ON_POSITION_CHANGED,
 export const onBirthDayChangedAC = (newDate) => ({type: ON_BIRTH_DAY_CHANGED, newDate});
 export const onGenderChangedAC = (newGender) => ({type: ON_GENDER_CHANGED, newGender});
 export const onDismissedChangedAC = (newDissmised) => ({type: ON_DISMISSED_CHANGED, newDissmised});
-export const isInvalidWorkerAC = (isInvalid) => ({type: IS_INVALID_WORKER, isInvalid})
 
 export default workersReducer;

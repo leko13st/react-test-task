@@ -7,8 +7,8 @@ const Header = () => {
             <table className={styles.headerTable}>
                 <tr>
                     <td width="11%">Панель инструментов</td>
-                    <td width>Работники</td>
-                    <td>Карточка работника</td>
+                    <td width>Сотрудники</td>
+                    <td>Карточка сотрудника</td>
                 </tr>
             </table>
         </div>

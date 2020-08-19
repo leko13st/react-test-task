@@ -40,7 +40,7 @@ const WorkerCard = (props) => {
     }
 
     const onFullNameChanged = (event) => {
-        props.onFullNameChanged(event.target.value, event.target.value ? false : true);
+        props.onFullNameChanged(event.target.value);
     }
 
     const onPositionChanged = (event) => {        
@@ -60,13 +60,13 @@ const WorkerCard = (props) => {
     }
 
     return(
-        <div className={styles.workerCard} dataWorker={props.dataWorker}>
+        <div className={styles.workerCard}>
             <table>
                 <tr onChange={onFullNameChanged}>
                     <td>ФИО:</td>
                     <td className={styles.infoAlign}>
                         <span className={styles.necessaryItem}>* </span>
-                        <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/>
+                        <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName} size="30" />
                     </td>
                 </tr>
                 <hr />
@@ -94,11 +94,11 @@ const WorkerCard = (props) => {
                     <td>Статус:</td>
                     <td className={styles.infoAlign}>{props.dataWorker.dismissed ? 'Уволен' : 'Работает'} {idDismissed()}</td>
                 </tr>
-                <hr />
+                {/* <hr />
                 <tr>
                     <td>Коллеги:</td>
                     <td className={styles.infoAlign}></td>
-                </tr>
+                </tr> */}
             </table>
         </div>
     )

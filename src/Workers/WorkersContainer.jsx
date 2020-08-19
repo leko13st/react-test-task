@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Workers from './Workers';
-import { selectWorkerAC } from '../redux/workersReducer';
+import { selectWorkerAC } from '../redux/mainReducer';
 
 class WorkersContainer extends React.Component{
-    debugger;
     render(){
         return <Workers workers={this.props.workers}
+                        positions={this.props.positions}
                         selectedWorker={this.props.selectedWorker}
                         selectWorker={this.props.selectWorker}
         />        
@@ -16,7 +16,8 @@ class WorkersContainer extends React.Component{
 const mapStateToProps = (state) => {
     return{
         workers: state.workersPage.workers,
-        selectedWorker: state.workersPage.selectedWorker
+        selectedWorker: state.workersPage.selectedWorker,
+        positions: state.workersPage.positions
     }
 }
 

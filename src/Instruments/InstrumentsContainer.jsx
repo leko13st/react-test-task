@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteSelectedWorkedAC, addNewWorkerAC } from '../redux/workersReducer';
+import { deleteSelectedWorkedAC, addNewWorkerAC } from '../redux/mainReducer';
 import Instruments from './Instruments';
 
 class InstrumentsContainer extends React.Component{
@@ -13,7 +13,6 @@ class InstrumentsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        workers: state.workersPage.workers,
         selectedWorker: state.workersPage.selectedWorker
     }
 }

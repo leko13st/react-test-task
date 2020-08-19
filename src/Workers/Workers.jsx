@@ -9,6 +9,7 @@ const Workers = (props) => {
     }
 
     let workerList = props.workers.map(worker => <Worker data={worker}
+                                                         positions={props.positions}
                                                          selectedWorker={props.selectedWorker}
                                                          selectWorker={selectWorker}
     />)

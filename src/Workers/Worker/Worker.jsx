@@ -2,12 +2,14 @@ import React from 'react';
 import styles from './Worker.module.css';
 
 const Worker = (props) => {
+    //Суммирование css-классов
     let styleWorkerList = [
         styles.worker,
         props.data.invalid && styles.invalidWorker,
         props.selectedWorker === props.data.id && styles.selectedWorker,
-    ].join(' ');    
+    ].join(' ');
 
+    //Форматирование даты в привычный вид ДД-ММ-ГГГГ
     const dateFormatter = () => {
         return props.data.birthDay.split('-').reverse().join('.');
     }
@@ -22,7 +24,7 @@ const Worker = (props) => {
                 <hr />
                 <tr>
                     <td>Должность</td>
-                    <td className={styles.infoAlign}>{props.data.position === "Укажите должность..." ? '' : props.data.position}</td>                    
+                    <td className={styles.infoAlign}>{props.data.position === props.positions[0] ? '' : props.data.position}</td>                    
                 </tr>
                 <hr />
                 <tr>
