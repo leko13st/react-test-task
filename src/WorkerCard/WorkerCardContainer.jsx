@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectWorkerAC, onFullNameChangedAC, onDismissedChangedAC, onPositionChangedAC, onBirthDayChangedAC, onGenderChangedAC } from '../redux/workersReducer';
+import { selectWorkerAC, onFullNameChangedAC, onDismissedChangedAC, onPositionChangedAC, onBirthDayChangedAC, onGenderChangedAC, isInvalidWorkerAC } from '../redux/workersReducer';
 import WorkerCard from './WorkerCard';
 import EmptyWorkerCard from './EmptyWorkerCard';
 
@@ -18,6 +18,7 @@ class WorkerCardContainer extends React.Component{
                                onBirthDayChanged={this.props.onBirthDayChanged}
                                onGenderChanged={this.props.onGenderChanged}
                                onDismissedChanged={this.props.onDismissedChanged}
+                               isInvalidWorker={this.props.isInvalidWorker}
                                />        
         else 
             return <EmptyWorkerCard />
@@ -40,7 +41,8 @@ const mapDispatchToProps = {
     onPositionChanged: onPositionChangedAC,
     onBirthDayChanged: onBirthDayChangedAC,
     onGenderChanged: onGenderChangedAC, 
-    onDismissedChanged: onDismissedChangedAC
+    onDismissedChanged: onDismissedChangedAC,
+    isInvalidWorker: isInvalidWorkerAC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerCardContainer);

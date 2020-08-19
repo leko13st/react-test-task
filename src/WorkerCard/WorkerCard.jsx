@@ -2,7 +2,10 @@ import React from 'react';
 import styles from './WorkerCard.module.css';
 
 const WorkerCard = (props) => {
-    let positionList = props.positions.map(position => {
+    let positionList = props.positions.map((position, index) => {
+        if (index === 0)
+            return (<option selected disabled value={position}>{position}</option>)
+        
         if (props.dataWorker.position === position)
             return (<option selected value={position}>{position}</option>)        
         else
@@ -37,7 +40,7 @@ const WorkerCard = (props) => {
     }
 
     const onFullNameChanged = (event) => {
-        props.onFullNameChanged(event.target.value);
+        props.onFullNameChanged(event.target.value, event.target.value ? false : true);
     }
 
     const onPositionChanged = (event) => {        
@@ -61,14 +64,17 @@ const WorkerCard = (props) => {
             <table>
                 <tr onChange={onFullNameChanged}>
                     <td>ФИО:</td>
-                    <td className={styles.infoAlign}><input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/></td>
+                    <td className={styles.infoAlign}>
+                        <span className={styles.necessaryItem}>* </span>
+                        <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/>
+                    </td>
                 </tr>
                 <hr />
                 <tr onChange={onPositionChanged}>
                     <td>Должность:</td>
                     <td className={styles.infoAlign}>
+                        <span className={styles.necessaryItem}>* </span>
                         <select>
-                            <option disabled selected value>Укажите должность...</option>
                             {positionList}
                         </select>   
                     </td>

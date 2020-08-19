@@ -6,18 +6,20 @@ const ON_POSITION_CHANGED = 'ON_POSITION_CHANGED';
 const ON_BIRTH_DAY_CHANGED = 'ON_BIRTH_DATE_CHANGED';
 const ON_GENDER_CHANGED = 'ON_GENDER_CHANGED';
 const ON_DISMISSED_CHANGED = 'ON_DISMISSED_CHANGED';
+const IS_INVALID_WORKER = 'IS_INVALID_WORKER';
 
 let initialState = {
     //список сотрудников
     workers: [ 
-        {id: 1, fullName: 'Иванов Иван Иванович', position: 'Директор', birthDay: '1976-08-15', gender: 'male', dismissed: false, colleagues: [4]},
-        {id: 2, fullName: 'Цаль Виталий Олегович', position: 'Программист', birthDay: '1991-01-19', gender: 'male', dismissed: false, colleagues: [3]},
-        {id: 3, fullName: 'Иванова Анна Алексеевна', position: 'Аналитик', birthDay: '1998-07-21', gender: 'female', dismissed: false, colleagues: [2]},
-        {id: 4, fullName: 'Козлов Александр Вадимович', position: 'HR', birthDay: '1990-04-08', gender: 'male', dismissed: true, colleagues: [1, 5]},
-        {id: 5, fullName: 'Бодров Данила Сергеевич', position: 'Тестер', birthDay: '1985-03-16', gender: 'male', dismissed: false, colleagues: [4]}
+        {id: 1, fullName: 'Иванов Иван Иванович', position: 'Директор', birthDay: '1976-08-15', gender: 'male', dismissed: false, colleagues: [4], invalid: false},
+        {id: 2, fullName: 'Цаль Виталий Олегович', position: 'Программист', birthDay: '1991-01-19', gender: 'male', dismissed: false, colleagues: [3], invalid: false},
+        {id: 3, fullName: 'Иванова Анна Алексеевна', position: 'Аналитик', birthDay: '1998-07-21', gender: 'female', dismissed: false, colleagues: [2], invalid: false},
+        {id: 4, fullName: 'Козлов Александр Вадимович', position: 'HR', birthDay: '1990-04-08', gender: 'male', dismissed: true, colleagues: [1, 5], invalid: false},
+        {id: 5, fullName: 'Бодров Данила Сергеевич', position: 'Тестер', birthDay: '1985-03-16', gender: 'male', dismissed: false, colleagues: [4], invalid: false}
     ],
     //Список должностей - отправляется в UI в комбобокс
-    positions: [ 
+    positions: [
+        'Укажите должность...',
         'Директор',
         'Программист',
         'Аналитик',
@@ -33,7 +35,6 @@ let initialState = {
 
 const workersReducer = (state = initialState, action) => {
     let index = -1;
-
     let findIndex = (idWorker) => { 
         for (let i = 0; i < state.workers.length; i++){
             if (state.workers[i].id === idWorker){
@@ -42,7 +43,37 @@ const workersReducer = (state = initialState, action) => {
             }
         }
     }
-    
+
+    let getUpdatedWorker = (property) => {
+        let worker = null;
+        state.workers.map(person => {
+            if (person.id === state.selectedWorker)
+                worker = person;
+            return null;
+        })
+
+        if (property === "fullName")
+            worker.fullName = action.newFullName;
+        else if (property === "position")
+            worker.position = action.newPosition;
+        
+        if (worker.fullName === '' || worker.position === state.positions[0])
+            worker.invalid = true;
+        else 
+            worker.invalid = false;
+
+        return worker;
+    }
+
+    let getUpdatedWorkers = (worker) => {
+            return state.workers.map(workerItem => {
+                if (workerItem.id === state.selectedWorker)
+                    return worker;                    
+                else
+                    return workerItem;
+            })
+    }
+
     switch (action.type){
         //здесь обрабатываются диспатчи
         case DELETE_SELECTED_WORKER: {
@@ -67,12 +98,12 @@ const workersReducer = (state = initialState, action) => {
             let newWorker = {
                 id: identify(), 
                 fullName: '', 
-                position: '', 
+                position: state.positions[0],
                 birthDay: '',
-                gender: 'male', 
-                dismissed: false
+                gender: 'male',
+                dismissed: false,
+                invalid: true
             }
-            debugger
             return{
                 ...state,
                 workers: [...state.workers, newWorker],
@@ -91,25 +122,23 @@ const workersReducer = (state = initialState, action) => {
             }
         }
         case ON_FULL_NAME_CHANGED: {
-            return{
+            
+            let worker = getUpdatedWorker('fullName'); 
+
+            return {
                 ...state,
-                workers: state.workers.map(worker => {
-                    if (worker.id === state.selectedWorker)
-                        worker.fullName = action.newFullName;
-                    return worker;
-                }),
-                dataWorker: {...state.dataWorker, fullName: action.newFullName}
+                workers: getUpdatedWorkers(worker),
+                dataWorker: {...state.dataWorker, fullName: action.newFullName, invalid: worker.invalid}
             }
         }
         case ON_POSITION_CHANGED: {
+
+            let worker = getUpdatedWorker('position');
+
             return{
                 ...state,
-                workers: state.workers.map(worker => {
-                    if (worker.id === state.selectedWorker)
-                        worker.position = action.newPosition;
-                    return worker;
-                }),
-                dataWorker: {...state.dataWorker, position: action.newPosition}
+                workers: getUpdatedWorkers(worker),
+                dataWorker: {...state.dataWorker, position: action.newPosition, invalid: worker.invalid}
             }
         }
         case ON_BIRTH_DAY_CHANGED: {
@@ -153,10 +182,11 @@ const workersReducer = (state = initialState, action) => {
 export const deleteSelectedWorkedAC = () => ({type: DELETE_SELECTED_WORKER});
 export const addNewWorkerAC = () => ({type: ADD_NEW_WORKER});
 export const selectWorkerAC = (idWorker) => ({type: SELECT_WORKER, idWorker});
-export const onFullNameChangedAC = (newFullName) => ({type: ON_FULL_NAME_CHANGED, newFullName});
+export const onFullNameChangedAC = (newFullName, isInvalid) => ({type: ON_FULL_NAME_CHANGED, newFullName, isInvalid});
 export const onPositionChangedAC = (newPosition) => ({type: ON_POSITION_CHANGED, newPosition});
 export const onBirthDayChangedAC = (newDate) => ({type: ON_BIRTH_DAY_CHANGED, newDate});
 export const onGenderChangedAC = (newGender) => ({type: ON_GENDER_CHANGED, newGender});
 export const onDismissedChangedAC = (newDissmised) => ({type: ON_DISMISSED_CHANGED, newDissmised});
+export const isInvalidWorkerAC = (isInvalid) => ({type: IS_INVALID_WORKER, isInvalid})
 
 export default workersReducer;

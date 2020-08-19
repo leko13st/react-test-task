@@ -18,3 +18,8 @@
 .infoAlign{
     text-align: right;
 }
+
+.necessaryItem{
+    font-size: 130%;
+    color: red;
+}

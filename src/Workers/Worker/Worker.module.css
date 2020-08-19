@@ -5,10 +5,6 @@
     padding: 5px;
 }
 
-.selectedWorker{
-    background: rgb(102, 205, 170);
-}
-
 .worker:hover{
     background: rgb(102, 205, 170);
     cursor: pointer;
@@ -20,4 +16,12 @@
 
 table{
     width: 100%;
+}
+
+.invalidWorker{
+    background: rgb(201, 37, 92);
+}
+
+.selectedWorker{
+    background: rgb(102, 205, 170);
 }

@@ -14,10 +14,8 @@ const Workers = (props) => {
     />)
 
     return(
-        <div className={styles.wrapper}>
-            <div className={styles.workers}>
-                {workerList}
-            </div>
+        <div className={styles.workers}>
+            {workerList}
         </div>
     )
 }

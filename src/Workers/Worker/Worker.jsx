@@ -4,7 +4,8 @@ import styles from './Worker.module.css';
 const Worker = (props) => {
     let styleWorkerList = [
         styles.worker,
-        props.selectedWorker === props.data.id && styles.selectedWorker
+        props.data.invalid && styles.invalidWorker,
+        props.selectedWorker === props.data.id && styles.selectedWorker,
     ].join(' ');    
 
     const dateFormatter = () => {
@@ -21,7 +22,7 @@ const Worker = (props) => {
                 <hr />
                 <tr>
                     <td>Должность</td>
-                    <td className={styles.infoAlign}>{props.data.position}</td>                    
+                    <td className={styles.infoAlign}>{props.data.position === "Укажите должность..." ? '' : props.data.position}</td>                    
                 </tr>
                 <hr />
                 <tr>
