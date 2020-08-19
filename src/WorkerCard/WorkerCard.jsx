@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './WorkerCard.module.css';
 
 const WorkerCard = (props) => {
-    //debugger
     let positionList = props.positions.map(position => {
         if (props.dataWorker.position === position)
             return (<option selected value={position}>{position}</option>)        
@@ -59,29 +58,42 @@ const WorkerCard = (props) => {
 
     return(
         <div className={styles.workerCard} dataWorker={props.dataWorker}>
-            <form>
-                <div onChange={onFullNameChanged}>
-                    ФИО: <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/>
-                </div>
-                <div onChange={onPositionChanged}>
-                    Должность: 
-                    <select>
-                        {positionList}
-                    </select>   
-                </div>
-                <div onChange={onBirthDayChanged}>
-                    Дата рождения: <input type="date" value={props.dataWorker.birthDay}/>
-                </div>
-                <div onChange={onGenderChanged}>
-                    Пол: {gender()}
-                </div>
-                <div onChange={onDismissedChanged}>
-                    Уволен: {idDismissed()}
-                </div>
-                <div>
-                    Коллеги: 
-                </div>
-            </form>
+            <table>
+                <tr onChange={onFullNameChanged}>
+                    <td>ФИО:</td>
+                    <td className={styles.infoAlign}><input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName}/></td>
+                </tr>
+                <hr />
+                <tr onChange={onPositionChanged}>
+                    <td>Должность:</td>
+                    <td className={styles.infoAlign}>
+                        <select>
+                            <option disabled selected value>Укажите должность...</option>
+                            {positionList}
+                        </select>   
+                    </td>
+                </tr>
+                <hr />
+                <tr onChange={onBirthDayChanged}>
+                    <td>Дата рождения:</td>
+                    <td className={styles.infoAlign}><input type="date" value={props.dataWorker.birthDay}/></td>
+                </tr>
+                <hr />
+                <tr onChange={onGenderChanged}>
+                    <td>Пол:</td>
+                    <td className={styles.infoAlign}>{gender()}</td>
+                </tr>
+                <hr />
+                <tr onChange={onDismissedChanged}>
+                    <td>Статус:</td>
+                    <td className={styles.infoAlign}>{props.dataWorker.dismissed ? 'Уволен' : 'Работает'} {idDismissed()}</td>
+                </tr>
+                <hr />
+                <tr>
+                    <td>Коллеги:</td>
+                    <td className={styles.infoAlign}></td>
+                </tr>
+            </table>
         </div>
     )
 }

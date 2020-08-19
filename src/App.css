@@ -3,11 +3,12 @@
   width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
+  font-size: 100%;
 
   grid-template-areas: 
   "header header header"
   "instruments workers workerCard";
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 1.5fr 3.5fr 7fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 1.5fr 4.5fr 7fr;
   grid-gap: 10px;
 }

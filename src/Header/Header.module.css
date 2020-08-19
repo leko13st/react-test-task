@@ -1,4 +1,12 @@
 .header{
     grid-area: header;
-    border: 3px solid black;
+    border: 5px solid rgb(0, 191, 255);
+    border-radius: 20px;
+    background: rgba(176, 224, 230, 0.7);
+}
+
+.headerTable tr td{
+    text-align: center;
+    font-weight: bold;
+    font-size: 110%;
 }

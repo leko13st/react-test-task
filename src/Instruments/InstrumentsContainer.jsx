@@ -6,13 +6,15 @@ import Instruments from './Instruments';
 class InstrumentsContainer extends React.Component{
     render(){
         return <Instruments deleteSelectedWorker={this.props.deleteSelectedWorker}
-                            addNewWorker={this.props.addNewWorker}/>        
+                            addNewWorker={this.props.addNewWorker}
+                            selectedWorker={this.props.selectedWorker}/>        
     }
 }
 
 const mapStateToProps = (state) => {
     return{
-        workers: state.workersPage.workers
+        workers: state.workersPage.workers,
+        selectedWorker: state.workersPage.selectedWorker
     }
 }
 

@@ -5,15 +5,40 @@ const Worker = (props) => {
     let styleWorkerList = [
         styles.worker,
         props.selectedWorker === props.data.id && styles.selectedWorker
-    ].join(' ');
-    
+    ].join(' ');    
+
+    const dateFormatter = () => {
+        return props.data.birthDay.split('-').reverse().join('.');
+    }
+
     return(
         <div className={styleWorkerList} onClick={() => props.selectWorker(props.data.id)}>
-            <div>{props.data.fullName}</div>
-            <div>{props.data.position}</div>           
-            <div>{props.data.birthDay}</div>           
-            <div>{props.data.gender === 'male' ? 'Мужчина' : 'Женщина'}</div>           
-            <div>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</div>           
+            <table>
+                <tr>
+                    <td>ФИО</td>
+                    <td className={styles.infoAlign}>{props.data.fullName}</td>                    
+                </tr>
+                <hr />
+                <tr>
+                    <td>Должность</td>
+                    <td className={styles.infoAlign}>{props.data.position}</td>                    
+                </tr>
+                <hr />
+                <tr>
+                    <td>Дата рождения</td>
+                    <td className={styles.infoAlign}>{dateFormatter()}</td>                    
+                </tr>
+                <hr />
+                <tr>
+                    <td>Пол</td>
+                    <td className={styles.infoAlign}>{props.data.gender === 'male' ? 'Мужчина' : 'Женщина'}</td>                    
+                </tr>
+                <hr />
+                <tr>
+                    <td>Статус</td>
+                    <td className={styles.infoAlign}>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</td>                    
+                </tr>
+            </table>
         </div>
     )
 }

@@ -1,4 +1,9 @@
 .workers{
     grid-area: workers;
-    border: 3px solid black;
+    border: 5px solid rgb(0, 191, 255);
+    border-radius: 20px;
+    background: rgba(176, 224, 230, 0.7);
+    overflow-y: scroll;
+    padding: 3px;
+    height: 800px;
 }

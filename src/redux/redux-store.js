@@ -1,10 +1,8 @@
 import { createStore, combineReducers } from 'redux';
 import workersReducer from './workersReducer';
-import workerCardReducer from './workerCardReducer';
 
 let reducers = combineReducers({
-    workersPage: workersReducer,
-    workerCardPage: workerCardReducer 
+    workersPage: workersReducer
 })
 
 let store = createStore(reducers);

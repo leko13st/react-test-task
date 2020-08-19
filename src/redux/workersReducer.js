@@ -8,14 +8,16 @@ const ON_GENDER_CHANGED = 'ON_GENDER_CHANGED';
 const ON_DISMISSED_CHANGED = 'ON_DISMISSED_CHANGED';
 
 let initialState = {
-    workers: [
+    //список сотрудников
+    workers: [ 
         {id: 1, fullName: 'Иванов Иван Иванович', position: 'Директор', birthDay: '1976-08-15', gender: 'male', dismissed: false, colleagues: [4]},
         {id: 2, fullName: 'Цаль Виталий Олегович', position: 'Программист', birthDay: '1991-01-19', gender: 'male', dismissed: false, colleagues: [3]},
         {id: 3, fullName: 'Иванова Анна Алексеевна', position: 'Аналитик', birthDay: '1998-07-21', gender: 'female', dismissed: false, colleagues: [2]},
         {id: 4, fullName: 'Козлов Александр Вадимович', position: 'HR', birthDay: '1990-04-08', gender: 'male', dismissed: true, colleagues: [1, 5]},
         {id: 5, fullName: 'Бодров Данила Сергеевич', position: 'Тестер', birthDay: '1985-03-16', gender: 'male', dismissed: false, colleagues: [4]}
     ],
-    positions: [
+    //Список должностей - отправляется в UI в комбобокс
+    positions: [ 
         'Директор',
         'Программист',
         'Аналитик',
@@ -25,8 +27,8 @@ let initialState = {
         'Бухгалтер',
         'Стажёр'
     ],
-    selectedWorker: null,
-    dataWorker: null
+    selectedWorker: null, //id выделеннего сотрудника
+    dataWorker: null //данные выделенного сотрудника
 }
 
 const workersReducer = (state = initialState, action) => {
@@ -42,6 +44,7 @@ const workersReducer = (state = initialState, action) => {
     }
     
     switch (action.type){
+        //здесь обрабатываются диспатчи
         case DELETE_SELECTED_WORKER: {
             findIndex(state.selectedWorker);           
             let array = state.workers.slice(0);
@@ -55,7 +58,10 @@ const workersReducer = (state = initialState, action) => {
         }
         case ADD_NEW_WORKER: {
             let identify = () => {
-                return state.workers[state.workers.length - 1].id + 1;
+                let lastWorker = state.workers[state.workers.length - 1];
+                if (lastWorker)
+                    return lastWorker.id + 1
+                else return 1;
             }
 
             let newWorker = {

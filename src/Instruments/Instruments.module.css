@@ -1,5 +1,28 @@
 .instruments{
     grid-area: instruments;
-    border: 3px solid black;
+    border: 5px solid rgb(0, 191, 255);
+    border-radius: 20px;
+    background: rgba(176, 224, 230, 0.7);
+    padding: 5px;
     height: 200px;
+    /* top: 132px;
+    position: fixed; */
+}
+
+button{
+    font-size: 120%;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.buttonCenter{
+    text-align: center;
+}
+
+button:hover{
+    background: rgb(102, 205, 170);
+}
+
+.hideButton{
+    display: none;
 }
