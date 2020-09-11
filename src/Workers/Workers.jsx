@@ -8,10 +8,11 @@ const Workers = (props) => {
         props.selectWorker(id);
     }
 
-    let workerList = props.workers.map(worker => <Worker data={worker}
-                                                         positions={props.positions}
-                                                         selectedWorker={props.selectedWorker}
-                                                         selectWorker={selectWorker}
+    let workerList = props.workers.map(worker => 
+        <Worker key={worker.id} 
+                data={worker}
+                selectedWorker={props.selectedWorker}
+                selectWorker={selectWorker}
     />)
 
     return(

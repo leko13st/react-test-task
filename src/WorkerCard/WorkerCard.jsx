@@ -2,42 +2,10 @@ import React from 'react';
 import styles from './WorkerCard.module.css';
 
 const WorkerCard = (props) => {
-    let positionList = props.positions.map((position, index) => {
-        if (index === 0)
-            return (<option selected disabled value={position}>{position}</option>)
-        
-        if (props.dataWorker.position === position)
-            return (<option selected value={position}>{position}</option>)        
-        else
-            return (<option value={position}>{position}</option>)
+    let positionList = props.positions.map(position => {
+            return (<option key={position} value={position}>{position}</option>)
         }
     )
-
-    let gender = () => {
-        if (props.dataWorker.gender === 'male'){
-            return (
-                <>
-                    <input checked name="gender" type="radio" value="male"/>Муж.
-                    <input name="gender" type="radio" value="female"/>Жен.
-                </>
-            )
-        }
-        else if (props.dataWorker.gender === 'female') {
-            return (
-                <> 
-                    <input name="gender" type="radio" value="male"/>Муж.
-                    <input checked name="gender" type="radio" value="female"/>Жен.
-                </>
-            )
-        }   
-    }
-
-    let idDismissed = () => {
-        if (props.dataWorker.dismissed)
-            return <input checked type="checkbox"/>
-        else 
-            return <input type="checkbox"/>
-    }
 
     const onFullNameChanged = (event) => {
         props.onFullNameChanged(event.target.value);
@@ -61,44 +29,48 @@ const WorkerCard = (props) => {
 
     return(
         <div className={styles.workerCard}>
-            <table>
-                <tr onChange={onFullNameChanged}>
-                    <td>ФИО:</td>
-                    <td className={styles.infoAlign}>
-                        <span className={styles.necessaryItem}>* </span>
-                        <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName} size="30" />
-                    </td>
-                </tr>
-                <hr />
-                <tr onChange={onPositionChanged}>
-                    <td>Должность:</td>
-                    <td className={styles.infoAlign}>
-                        <span className={styles.necessaryItem}>* </span>
-                        <select>
-                            {positionList}
-                        </select>   
-                    </td>
-                </tr>
-                <hr />
-                <tr onChange={onBirthDayChanged}>
-                    <td>Дата рождения:</td>
-                    <td className={styles.infoAlign}><input type="date" value={props.dataWorker.birthDay}/></td>
-                </tr>
-                <hr />
-                <tr onChange={onGenderChanged}>
-                    <td>Пол:</td>
-                    <td className={styles.infoAlign}>{gender()}</td>
-                </tr>
-                <hr />
-                <tr onChange={onDismissedChanged}>
-                    <td>Статус:</td>
-                    <td className={styles.infoAlign}>{props.dataWorker.dismissed ? 'Уволен' : 'Работает'} {idDismissed()}</td>
-                </tr>
-                {/* <hr />
-                <tr>
+            <table cellSpacing='0'>
+                <tbody className={styles.blockLine}>                    
+                    <tr>
+                        <td>ФИО:</td>
+                        <td className={styles.infoAlign}>
+                            <span className={styles.necessaryItem}>* </span>
+                            <input type="text" placeholder="Заполните поле" value={props.dataWorker.fullName} size="30" onChange={onFullNameChanged}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Должность:</td>
+                        <td className={styles.infoAlign}>
+                            <span className={styles.necessaryItem}>* </span>
+                            <select value={props.dataWorker.position === '' ? 'init' : props.dataWorker.position} onChange={onPositionChanged}>
+                                <option disabled value={'init'}>Укажите должность...</option>
+                                {positionList}
+                            </select>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата рождения:</td>
+                        <td className={styles.infoAlign}><input type="date" value={props.dataWorker.birthDay} onChange={onBirthDayChanged}/></td>
+                    </tr>
+                    <tr onChange={onGenderChanged}>
+                        <td>Пол:</td>
+                        <td className={styles.infoAlign}>
+                            <input checked={props.dataWorker.gender === 'male' ? true : false} readOnly name="gender" type="radio" value="male"/>Муж.
+                            <input checked={props.dataWorker.gender === 'female' ? true : false} readOnly name="gender" type="radio" value="female"/>Жен.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Статус:</td>
+                        <td className={styles.infoAlign}>{props.dataWorker.dismissed ? 'Уволен' : 'Работает'} 
+                                                         <input checked={props.dataWorker.dismissed} type="checkbox" onChange={onDismissedChanged}/>
+                        </td>
+                    </tr>
+                    {/* <hr />
+                    <tr>
                     <td>Коллеги:</td>
                     <td className={styles.infoAlign}></td>
                 </tr> */}
+                </tbody>
             </table>
         </div>
     )

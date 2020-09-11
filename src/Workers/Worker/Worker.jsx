@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Worker.module.css';
+import moment from 'moment';
 
 const Worker = (props) => {
     //Суммирование css-классов
@@ -11,36 +12,35 @@ const Worker = (props) => {
 
     //Форматирование даты в привычный вид ДД-ММ-ГГГГ
     const dateFormatter = () => {
-        return props.data.birthDay.split('-').reverse().join('.');
+        debugger
+        return moment(props.data.birthDay).format('DD.MM.YYYY');
     }
 
     return(
         <div className={styleWorkerList} onClick={() => props.selectWorker(props.data.id)}>
-            <table>
-                <tr>
-                    <td>ФИО</td>
-                    <td className={styles.infoAlign}>{props.data.fullName}</td>                    
-                </tr>
-                <hr />
-                <tr>
-                    <td>Должность</td>
-                    <td className={styles.infoAlign}>{props.data.position === props.positions[0] ? '' : props.data.position}</td>                    
-                </tr>
-                <hr />
-                <tr>
-                    <td>Дата рождения</td>
-                    <td className={styles.infoAlign}>{dateFormatter()}</td>                    
-                </tr>
-                <hr />
-                <tr>
-                    <td>Пол</td>
-                    <td className={styles.infoAlign}>{props.data.gender === 'male' ? 'Мужчина' : 'Женщина'}</td>                    
-                </tr>
-                <hr />
-                <tr>
-                    <td>Статус</td>
-                    <td className={styles.infoAlign}>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</td>                    
-                </tr>
+            <table cellSpacing='0'>
+                <tbody className={styles.blockLine}>                    
+                    <tr>
+                        <td>ФИО</td>
+                        <td className={styles.infoAlign}>{props.data.fullName}</td>                    
+                    </tr>
+                    <tr>
+                        <td>Должность</td>
+                        <td className={styles.infoAlign}>{props.data.position === '' ? '' : props.data.position}</td>                    
+                    </tr>
+                    <tr>
+                        <td>Дата рождения</td>
+                        <td className={styles.infoAlign}>{dateFormatter()}</td>                    
+                    </tr>
+                    <tr>
+                        <td>Пол</td>
+                        <td className={styles.infoAlign}>{props.data.gender === 'male' ? 'Мужчина' : 'Женщина'}</td>                    
+                    </tr>
+                    <tr>
+                        <td>Статус</td>
+                        <td className={styles.infoAlign}>{props.data.dismissed ? 'Уволен(а)' : 'Работает'}</td>                    
+                    </tr>
+                </tbody>
             </table>
         </div>
     )

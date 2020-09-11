@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { onFullNameChangedAC, onDismissedChangedAC, onPositionChangedAC, onBirthDayChangedAC, onGenderChangedAC } from '../redux/mainReducer';
 import WorkerCard from './WorkerCard';
-import EmptyWorkerCard from './EmptyWorkerCard';
+import styles from './WorkerCard.module.css'
 
 class WorkerCardContainer extends React.Component{
     render(){
@@ -15,9 +15,9 @@ class WorkerCardContainer extends React.Component{
                                onBirthDayChanged={this.props.onBirthDayChanged}
                                onGenderChanged={this.props.onGenderChanged}
                                onDismissedChanged={this.props.onDismissedChanged}
-                               />        
+                    />        
         else 
-            return <EmptyWorkerCard />
+            return <div className={styles.emptyWorkerCard}></div>
     }
 }
 

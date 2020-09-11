@@ -5,11 +5,13 @@ const Header = () => {
     return(
         <div className={styles.header}>
             <table className={styles.headerTable}>
-                <tr>
-                    <td width="11%">Панель инструментов</td>
-                    <td width>Сотрудники</td>
-                    <td>Карточка сотрудника</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td width="11%">Панель инструментов</td>
+                        <td>Сотрудники</td>
+                        <td>Карточка сотрудника</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     )

@@ -18,7 +18,6 @@ let initialState = {
     ],
     //Список должностей - отправляется в UI в комбобокс
     positions: [
-        'Укажите должность...',
         'Директор',
         'Программист',
         'Аналитик',
@@ -27,6 +26,14 @@ let initialState = {
         'Инженер',
         'Бухгалтер',
         'Стажёр'
+    ],
+    genders: [
+        'male',
+        'female'
+    ],
+    dismissed: [
+        true,
+        false
     ],
     selectedWorker: null, //id выделеннего сотрудника
     dataWorker: null //данные выделенного сотрудника
@@ -58,7 +65,7 @@ const workersReducer = (state = initialState, action) => {
         else if (property === "position")
             worker.position = action.newPosition;
         
-        if (worker.fullName === '' || worker.position === state.positions[0])
+        if (worker.fullName === '' || worker.position === '')
             worker.invalid = true;
         else 
             worker.invalid = false;
@@ -100,7 +107,7 @@ const workersReducer = (state = initialState, action) => {
             let newWorker = {
                 id: identify(), 
                 fullName: '', 
-                position: state.positions[0],
+                position: '',
                 birthDay: '',
                 gender: 'male',
                 dismissed: false,

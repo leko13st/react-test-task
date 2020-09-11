@@ -5,19 +5,14 @@ import { selectWorkerAC } from '../redux/mainReducer';
 
 class WorkersContainer extends React.Component{
     render(){
-        return <Workers workers={this.props.workers}
-                        positions={this.props.positions}
-                        selectedWorker={this.props.selectedWorker}
-                        selectWorker={this.props.selectWorker}
-        />        
+        return <Workers {...this.props}/>        
     }
 }
 
 const mapStateToProps = (state) => {
     return{
         workers: state.workersPage.workers,
-        selectedWorker: state.workersPage.selectedWorker,
-        positions: state.workersPage.positions
+        selectedWorker: state.workersPage.selectedWorker
     }
 }
 

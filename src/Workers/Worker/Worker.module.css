@@ -25,3 +25,9 @@ table{
 .selectedWorker{
     background: rgb(102, 205, 170);
 }
+
+.blockLine tr td{
+    border-bottom: 2px solid rgb(20, 140, 180);
+    padding: 15px 0 15px 0;
+    border-spacing: 0px;
+}

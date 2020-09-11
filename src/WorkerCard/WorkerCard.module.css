@@ -13,6 +13,7 @@
     border: 5px solid rgb(0, 191, 255);
     border-radius: 20px;
     background: rgba(176, 224, 230, 0.7);
+    height: 350px;
 }
 
 .infoAlign{
@@ -22,4 +23,10 @@
 .necessaryItem{
     font-size: 130%;
     color: red;
+}
+
+.blockLine tr td{
+    border-bottom: 2px solid rgb(53, 180, 223);
+    padding: 15px 0 15px 0;
+    border-spacing: 0px;
 }
